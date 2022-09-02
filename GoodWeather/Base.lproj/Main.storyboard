@@ -11,7 +11,7 @@
         <!--GoodWeather-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GoodWeather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="WeatherListViewController" customModule="GoodWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,15 +20,51 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Yuq-mZ-6fT">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WeatherCell" rowHeight="90" id="Yuq-mZ-6fT" customClass="WeatherCell" customModule="GoodWeather" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yuq-mZ-6fT" id="GZJ-N5-0Le">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colombo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DZ-cf-GJJ">
+                                                    <rect key="frame" x="20" y="34.5" width="286" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="CjO-T7-hBa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ix-xU-Css">
+                                                    <rect key="frame" x="314" y="34.5" width="80" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Xo7-d9-U2T"/>
+                                                        <constraint firstAttribute="width" constant="80" id="j11-ge-bWb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6DZ-cf-GJJ" firstAttribute="leading" secondItem="GZJ-N5-0Le" secondAttribute="leadingMargin" id="dRc-BB-Brf"/>
+                                                <constraint firstItem="6DZ-cf-GJJ" firstAttribute="centerY" secondItem="GZJ-N5-0Le" secondAttribute="centerY" id="ecE-S1-fjX"/>
+                                                <constraint firstItem="3ix-xU-Css" firstAttribute="trailing" secondItem="GZJ-N5-0Le" secondAttribute="trailingMargin" id="iDU-9h-L9T"/>
+                                                <constraint firstItem="3ix-xU-Css" firstAttribute="leading" secondItem="6DZ-cf-GJJ" secondAttribute="trailing" constant="8" symbolic="YES" id="nds-1h-T8q"/>
+                                                <constraint firstItem="3ix-xU-Css" firstAttribute="centerY" secondItem="GZJ-N5-0Le" secondAttribute="centerY" id="p94-Rv-gzF"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cityLabel" destination="6DZ-cf-GJJ" id="QBU-Hf-Pso"/>
+                                            <outlet property="temperatureLabel" destination="3ix-xU-Css" id="eIS-vC-lfQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="AbA-lH-j0a"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="KyZ-iJ-T6x"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -56,14 +92,52 @@
         <!--Add City-->
         <scene sceneID="RMS-1B-a71">
             <objects>
-                <viewController id="Nbj-c7-hvV" sceneMemberID="viewController">
+                <viewController id="Nbj-c7-hvV" customClass="AddWeatherViewController" customModule="GoodWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ytc-AM-f2K">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ULK-i4-Uzj">
+                                <rect key="frame" x="20" y="92" width="374" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Zbb-yl-cbW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8u-ND-UA1">
+                                <rect key="frame" x="157" y="134" width="100" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="eHO-6Q-O1Q"/>
+                                    <constraint firstAttribute="width" constant="100" id="gNX-36-SQa"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="save" destination="Nbj-c7-hvV" eventType="touchUpInside" id="MkQ-ba-8kP"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="kc0-gT-4e2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kc0-gT-4e2" firstAttribute="trailing" secondItem="ULK-i4-Uzj" secondAttribute="trailing" constant="20" id="Ej6-Mk-aOh"/>
+                            <constraint firstItem="b8u-ND-UA1" firstAttribute="centerX" secondItem="Ytc-AM-f2K" secondAttribute="centerX" id="P2X-AK-9v9"/>
+                            <constraint firstItem="ULK-i4-Uzj" firstAttribute="leading" secondItem="kc0-gT-4e2" secondAttribute="leading" constant="20" id="fJd-WH-aTr"/>
+                            <constraint firstItem="ULK-i4-Uzj" firstAttribute="top" secondItem="kc0-gT-4e2" secondAttribute="top" constant="36" id="fjH-MI-U3E"/>
+                            <constraint firstItem="b8u-ND-UA1" firstAttribute="top" secondItem="ULK-i4-Uzj" secondAttribute="bottom" constant="8" symbolic="YES" id="qc0-BT-EeI"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add City" id="MYc-4m-ejJ"/>
+                    <navigationItem key="navigationItem" title="Add City" id="MYc-4m-ejJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NYs-rc-JHD">
+                            <connections>
+                                <action selector="cancel" destination="Nbj-c7-hvV" id="3mB-cc-lN0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cityNameTextField" destination="ULK-i4-Uzj" id="zc2-th-tMR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WYm-4n-RxG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
